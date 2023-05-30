@@ -1,8 +1,0 @@
-path: dog_cat
-train: train/images
-val: valid/images
-test: test/images
-
-name:
-  0: cat
-  1: dog
