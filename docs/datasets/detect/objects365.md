@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Discover the Objects365 dataset, designed for object detection research with a focus on diverse objects, featuring 365 categories, 2 million images, and 30 million bounding boxes.
+description: Discover the Objects365 datasets, designed for object detection research with a focus on diverse objects, featuring 365 categories, 2 million images, and 30 million bounding boxes.
 ---
 
 # Objects365 Dataset

@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Discover the VisDrone dataset, a comprehensive benchmark for drone-based computer vision tasks, including object detection, tracking, and crowd counting.
+description: Discover the VisDrone datasets, a comprehensive benchmark for drone-based computer vision tasks, including object detection, tracking, and crowd counting.
 ---
 
 # VisDrone Dataset

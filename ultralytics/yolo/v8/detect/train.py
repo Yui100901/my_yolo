@@ -55,7 +55,7 @@ class DetectionTrainer(BaseTrainer):
                                      shuffle=mode == 'train',
                                      seed=self.args.seed)[0]
         assert mode in ['train', 'val']
-        with torch_distributed_zero_first(rank):  # init dataset *.cache only once if DDP
+        with torch_distributed_zero_first(rank):  # init datasets *.cache only once if DDP
             dataset = self.build_dataset(dataset_path, mode, batch_size)
         shuffle = mode == 'train'
         if getattr(dataset, 'rect', False) and shuffle:
@@ -77,7 +77,7 @@ class DetectionTrainer(BaseTrainer):
         self.model.nc = self.data['nc']  # attach number of classes to model
         self.model.names = self.data['names']  # attach class names to model
         self.model.args = self.args  # attach hyperparameters to model
-        # TODO: self.model.class_weights = labels_to_class_weights(dataset.labels, nc).to(device) * nc
+        # TODO: self.model.class_weights = labels_to_class_weights(datasets.labels, nc).to(device) * nc
 
     def get_model(self, cfg=None, weights=None, verbose=True):
         """Return a YOLO detection model."""

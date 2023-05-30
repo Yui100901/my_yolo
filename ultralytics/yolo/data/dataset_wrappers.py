@@ -8,31 +8,31 @@ from .augment import LetterBox
 
 class MixAndRectDataset:
     """
-    A dataset class that applies mosaic and mixup transformations as well as rectangular training.
+    A datasets class that applies mosaic and mixup transformations as well as rectangular training.
 
     Attributes:
-        dataset: The base dataset.
-        imgsz: The size of the images in the dataset.
+        dataset: The base datasets.
+        imgsz: The size of the images in the datasets.
     """
 
     def __init__(self, dataset):
         """
         Args:
-            dataset (BaseDataset): The base dataset to apply transformations to.
+            dataset (BaseDataset): The base datasets to apply transformations to.
         """
         self.dataset = dataset
         self.imgsz = dataset.imgsz
 
     def __len__(self):
-        """Returns the number of items in the dataset."""
+        """Returns the number of items in the datasets."""
         return len(self.dataset)
 
     def __getitem__(self, index):
         """
-        Applies mosaic, mixup and rectangular training transformations to an item in the dataset.
+        Applies mosaic, mixup and rectangular training transformations to an item in the datasets.
 
         Args:
-            index (int): Index of the item in the dataset.
+            index (int): Index of the item in the datasets.
 
         Returns:
             (dict): A dictionary containing the transformed item data.

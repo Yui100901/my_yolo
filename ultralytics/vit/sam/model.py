@@ -32,7 +32,7 @@ class SAM:
         raise NotImplementedError("SAM models don't support training")
 
     def val(self, **kwargs):
-        """Run validation given dataset."""
+        """Run validation given datasets."""
         raise NotImplementedError("SAM models don't support validation")
 
     def info(self, detailed=False, verbose=True):

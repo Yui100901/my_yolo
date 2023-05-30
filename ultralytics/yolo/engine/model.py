@@ -278,10 +278,10 @@ class YOLO:
     @smart_inference_mode()
     def val(self, data=None, **kwargs):
         """
-        Validate a model on a given dataset.
+        Validate a model on a given datasets.
 
         Args:
-            data (str): The dataset to validate on. Accepts all formats accepted by yolo
+            data (str): The datasets to validate on. Accepts all formats accepted by yolo
             **kwargs : Any other args accepted by the validators. To see all args check 'configuration' section in docs
         """
         overrides = self.overrides.copy()
@@ -341,7 +341,7 @@ class YOLO:
 
     def train(self, **kwargs):
         """
-        Trains the model on a given dataset.
+        Trains the model on a given datasets.
 
         Args:
             **kwargs (Any): Any number of arguments representing the training configuration.
@@ -396,7 +396,7 @@ class YOLO:
         Runs hyperparameter tuning using Ray Tune.
 
         Args:
-            data (str): The dataset to run the tuner on.
+            data (str): The datasets to run the tuner on.
             space (dict, optional): The hyperparameter search space. Defaults to None.
             grace_period (int, optional): The grace period in epochs of the ASHA scheduler. Defaults to 10.
             gpu_per_trial (int, optional): The number of GPUs to allocate per trial. Defaults to None.

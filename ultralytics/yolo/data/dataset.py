@@ -21,14 +21,14 @@ class YOLODataset(BaseDataset):
     Dataset class for loading object detection and/or segmentation labels in YOLO format.
 
     Args:
-        data (dict, optional): A dataset YAML dictionary. Defaults to None.
+        data (dict, optional): A datasets YAML dictionary. Defaults to None.
         use_segments (bool, optional): If True, segmentation masks are used as labels. Defaults to False.
         use_keypoints (bool, optional): If True, keypoints are used as labels. Defaults to False.
 
     Returns:
-        (torch.utils.data.Dataset): A PyTorch dataset object that can be used for training an object detection model.
+        (torch.utils.data.Dataset): A PyTorch datasets object that can be used for training an object detection model.
     """
-    cache_version = '1.0.2'  # dataset labels *.cache version, >= 1.0.0 for YOLOv8
+    cache_version = '1.0.2'  # datasets labels *.cache version, >= 1.0.0 for YOLOv8
     rand_interp_methods = [cv2.INTER_NEAREST, cv2.INTER_LINEAR, cv2.INTER_CUBIC, cv2.INTER_AREA, cv2.INTER_LANCZOS4]
 
     def __init__(self, *args, data=None, use_segments=False, use_keypoints=False, **kwargs):
@@ -39,7 +39,7 @@ class YOLODataset(BaseDataset):
         super().__init__(*args, **kwargs)
 
     def cache_labels(self, path=Path('./labels.cache')):
-        """Cache dataset labels, check images and read shapes.
+        """Cache datasets labels, check images and read shapes.
         Args:
             path (Path): path where to save the cache file (default: Path('./labels.cache')).
         Returns:
@@ -127,14 +127,14 @@ class YOLODataset(BaseDataset):
         labels = cache['labels']
         self.im_files = [lb['im_file'] for lb in labels]  # update im_files
 
-        # Check if the dataset is all boxes or all segments
+        # Check if the datasets is all boxes or all segments
         lengths = ((len(lb['cls']), len(lb['bboxes']), len(lb['segments'])) for lb in labels)
         len_cls, len_boxes, len_segments = (sum(x) for x in zip(*lengths))
         if len_segments and len_boxes != len_segments:
             LOGGER.warning(
                 f'WARNING ⚠️ Box and segment counts should be equal, but got len(segments) = {len_segments}, '
                 f'len(boxes) = {len_boxes}. To resolve this only boxes will be used and all segments will be removed. '
-                'To avoid this please supply either a detect or segment dataset, not a detect-segment mixed dataset.')
+                'To avoid this please supply either a detect or segment datasets, not a detect-segment mixed datasets.')
             for lb in labels:
                 lb['segments'] = []
         if len_cls == 0:
@@ -211,8 +211,8 @@ class ClassificationDataset(torchvision.datasets.ImageFolder):
         cache_ram (bool): True if images should be cached in RAM, False otherwise.
         cache_disk (bool): True if images should be cached on disk, False otherwise.
         samples (list): List of samples containing file, index, npy, and im.
-        torch_transforms (callable): torchvision transforms applied to the dataset.
-        album_transforms (callable, optional): Albumentations transforms applied to the dataset if augment is True.
+        torch_transforms (callable): torchvision transforms applied to the datasets.
+        album_transforms (callable, optional): Albumentations transforms applied to the datasets if augment is True.
     """
 
     def __init__(self, root, args, augment=False, cache=False):
@@ -221,8 +221,8 @@ class ClassificationDataset(torchvision.datasets.ImageFolder):
 
         Args:
             root (str): Dataset path.
-            args (Namespace): Argument parser containing dataset related settings.
-            augment (bool, optional): True if dataset should be augmented, False otherwise. Defaults to False.
+            args (Namespace): Argument parser containing datasets related settings.
+            augment (bool, optional): True if datasets should be augmented, False otherwise. Defaults to False.
             cache (Union[bool, str], optional): Cache setting, can be True, False, 'ram' or 'disk'. Defaults to False.
         """
         super().__init__(root=root)

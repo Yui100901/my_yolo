@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the Argoverse dataset, a rich dataset designed to support research in autonomous driving tasks such as 3D tracking, motion forecasting, and stereo depth estimation.
+description: Learn about the Argoverse datasets, a rich datasets designed to support research in autonomous driving tasks such as 3D tracking, motion forecasting, and stereo depth estimation.
 ---
 
 # Argoverse Dataset

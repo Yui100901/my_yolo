@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the COCO-Pose dataset, designed to encourage research on pose estimation tasks with standardized evaluation metrics.
+description: Learn about the COCO-Pose datasets, designed to encourage research on pose estimation tasks with standardized evaluation metrics.
 ---
 
 # COCO-Pose Dataset

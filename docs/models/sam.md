@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the Segment Anything Model (SAM) and how it provides promptable image segmentation through an advanced architecture and the SA-1B dataset.
+description: Learn about the Segment Anything Model (SAM) and how it provides promptable image segmentation through an advanced architecture and the SA-1B datasets.
 ---
 
 # Segment Anything Model (SAM)

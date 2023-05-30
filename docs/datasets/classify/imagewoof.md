@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the ImageWoof dataset, a subset of the ImageNet consisting of 10 challenging-to-classify dog breed classes.
+description: Learn about the ImageWoof datasets, a subset of the ImageNet consisting of 10 challenging-to-classify dog breed classes.
 ---
 
 # ImageWoof Dataset
@@ -59,10 +59,10 @@ ImageWoof dataset comes in three different sizes to accommodate various research
 To use these variants in your training, simply replace 'imagewoof' in the dataset argument with 'imagewoof320' or 'imagewoof160'. For example:
 
 ```python
-# For medium-sized dataset
+# For medium-sized datasets
 model.train(data='imagewoof320', epochs=100, imgsz=224)
 
-# For small-sized dataset
+# For small-sized datasets
 model.train(data='imagewoof160', epochs=100, imgsz=224)
 ```
 

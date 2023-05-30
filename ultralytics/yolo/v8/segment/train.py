@@ -92,10 +92,10 @@ class SegLoss(Loss):
             gt_labels, gt_bboxes = targets.split((1, 4), 2)  # cls, xyxy
             mask_gt = gt_bboxes.sum(2, keepdim=True).gt_(0)
         except RuntimeError as e:
-            raise TypeError('ERROR ❌ segment dataset incorrectly formatted or not a segment dataset.\n'
-                            "This error can occur when incorrectly training a 'segment' model on a 'detect' dataset, "
-                            "i.e. 'yolo train model=yolov8n-seg.pt data=coco128.yaml'.\nVerify your dataset is a "
-                            "correctly formatted 'segment' dataset using 'data=coco128-seg.yaml' "
+            raise TypeError('ERROR ❌ segment datasets incorrectly formatted or not a segment datasets.\n'
+                            "This error can occur when incorrectly training a 'segment' model on a 'detect' datasets, "
+                            "i.e. 'yolo train model=yolov8n-seg.pt data=coco128.yaml'.\nVerify your datasets is a "
+                            "correctly formatted 'segment' datasets using 'data=coco128-seg.yaml' "
                             'as an example.\nSee https://docs.ultralytics.com/tasks/segment/ for help.') from e
 
         # pboxes

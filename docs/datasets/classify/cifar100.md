@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the CIFAR-100 dataset, a collection of images that are commonly used to train machine learning and computer vision algorithms.
+description: Learn about the CIFAR-100 datasets, a collection of images that are commonly used to train machine learning and computer vision algorithms.
 ---
 
 # CIFAR-100 Dataset

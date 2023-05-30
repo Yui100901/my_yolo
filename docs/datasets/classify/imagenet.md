@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the ImageNet dataset, a large-scale database of annotated images commonly used for training deep learning models in computer vision tasks.
+description: Learn about the ImageNet datasets, a large-scale database of annotated images commonly used for training deep learning models in computer vision tasks.
 ---
 
 # ImageNet Dataset

@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the COCO-Seg dataset, designed for simple training of YOLO models on instance segmentation tasks.
+description: Learn about the COCO-Seg datasets, designed for simple training of YOLO models on instance segmentation tasks.
 ---
 
 # COCO-Seg Dataset

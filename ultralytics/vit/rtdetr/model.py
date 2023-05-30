@@ -78,7 +78,7 @@ class RTDETR:
         raise NotImplementedError("RTDETR models don't support training")
 
     def val(self, **kwargs):
-        """Run validation given dataset."""
+        """Run validation given datasets."""
         overrides = dict(task='detect', mode='val')
         overrides.update(kwargs)  # prefer kwargs
         args = get_cfg(cfg=DEFAULT_CFG, overrides=overrides)

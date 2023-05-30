@@ -1,6 +1,6 @@
 # Ultralytics YOLO 🚀, AGPL-3.0 license
 """
-Check a model's accuracy on a test or val split of a dataset
+Check a model's accuracy on a test or val split of a datasets
 
 Usage:
     $ yolo mode=val model=yolov8n.pt data=coco128.yaml imgsz=640
@@ -206,11 +206,11 @@ class BaseValidator:
             callback(self)
 
     def get_dataloader(self, dataset_path, batch_size):
-        """Get data loader from dataset path and batch size."""
+        """Get data loader from datasets path and batch size."""
         raise NotImplementedError('get_dataloader function not implemented for this validator')
 
     def build_dataset(self, img_path):
-        """Build dataset"""
+        """Build datasets"""
         raise NotImplementedError('build_dataset function not implemented in validator')
 
     def preprocess(self, batch):

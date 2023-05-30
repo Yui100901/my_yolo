@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the ImageNet10 dataset, a compact subset of the original ImageNet dataset designed for quick testing, CI tests, and sanity checks.
+description: Learn about the ImageNet10 datasets, a compact subset of the original ImageNet datasets designed for quick testing, CI tests, and sanity checks.
 ---
 
 # ImageNet10 Dataset

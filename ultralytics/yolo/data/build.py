@@ -39,7 +39,7 @@ class InfiniteDataLoader(dataloader.DataLoader):
 
     def reset(self):
         """Reset iterator.
-        This is useful when we want to modify settings of dataset while training.
+        This is useful when we want to modify settings of datasets while training.
         """
         self.iterator = self._get_iterator()
 
@@ -145,7 +145,7 @@ def load_inference_source(source=None, imgsz=640, vid_stride=1):
         vid_stride (int, optional): The frame interval for video sources. Default is 1.
 
     Returns:
-        dataset (Dataset): A dataset object for the specified input source.
+        datasets (Dataset): A datasets object for the specified input source.
     """
     source, webcam, screenshot, from_img, in_memory, tensor = check_source(source)
     source_type = source.source_type if in_memory else SourceTypes(webcam, screenshot, from_img, tensor)
@@ -164,7 +164,7 @@ def load_inference_source(source=None, imgsz=640, vid_stride=1):
     else:
         dataset = LoadImages(source, imgsz=imgsz, vid_stride=vid_stride)
 
-    # Attach source types to the dataset
+    # Attach source types to the datasets
     setattr(dataset, 'source_type', source_type)
 
     return dataset

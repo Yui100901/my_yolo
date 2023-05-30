@@ -21,7 +21,7 @@ from .utils import HELP_URL, IMG_FORMATS
 
 class BaseDataset(Dataset):
     """
-    Base dataset class for loading and processing image data.
+    Base datasets class for loading and processing image data.
 
     Args:
         img_path (str): Path to the folder containing images.
@@ -36,12 +36,12 @@ class BaseDataset(Dataset):
         pad (float, optional): Padding. Defaults to 0.0.
         single_cls (bool, optional): If True, single class training is used. Defaults to False.
         classes (list): List of included classes. Default is None.
-        fraction (float): Fraction of dataset to utilize. Default is 1.0 (use all data).
+        fraction (float): Fraction of datasets to utilize. Default is 1.0 (use all data).
 
     Attributes:
         im_files (list): List of image file paths.
         labels (list): List of label data dictionaries.
-        ni (int): Number of images in the dataset.
+        ni (int): Number of images in the datasets.
         ims (list): List of loaded images.
         npy_files (list): List of numpy file paths.
         transforms (callable): Image transformation function.
@@ -141,7 +141,7 @@ class BaseDataset(Dataset):
                 self.labels[i]['cls'][:, 0] = 0
 
     def load_image(self, i):
-        """Loads 1 image from dataset index 'i', returns (im, resized hw)."""
+        """Loads 1 image from datasets index 'i', returns (im, resized hw)."""
         im, f, fn = self.ims[i], self.im_files[i], self.npy_files[i]
         if im is None:  # not cached in RAM
             if fn.exists():  # load npy
@@ -199,7 +199,7 @@ class BaseDataset(Dataset):
             im = cv2.imread(random.choice(self.im_files))  # sample image
             ratio = self.imgsz / max(im.shape[0], im.shape[1])  # max(h, w)  # ratio
             b += im.nbytes * ratio ** 2
-        mem_required = b * self.ni / n * (1 + safety_margin)  # GB required to cache dataset into RAM
+        mem_required = b * self.ni / n * (1 + safety_margin)  # GB required to cache datasets into RAM
         mem = psutil.virtual_memory()
         cache = mem_required < mem.available  # to cache or not to cache, that is the question
         if not cache:
@@ -239,7 +239,7 @@ class BaseDataset(Dataset):
         return self.transforms(self.get_image_and_label(index))
 
     def get_image_and_label(self, index):
-        """Get and return label information from the dataset."""
+        """Get and return label information from the datasets."""
         label = deepcopy(self.labels[index])  # requires deepcopy() https://github.com/ultralytics/ultralytics/pull/1948
         label.pop('shape', None)  # shape is for rect, remove it
         label['img'], label['ori_shape'], label['resized_shape'] = self.load_image(index)
@@ -250,7 +250,7 @@ class BaseDataset(Dataset):
         return self.update_labels_info(label)
 
     def __len__(self):
-        """Returns the length of the labels list for the dataset."""
+        """Returns the length of the labels list for the datasets."""
         return len(self.labels)
 
     def update_labels_info(self, label):

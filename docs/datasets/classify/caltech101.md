@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the Caltech-101 dataset, a collection of images for object recognition tasks in machine learning and computer vision algorithms.
+description: Learn about the Caltech-101 datasets, a collection of images for object recognition tasks in machine learning and computer vision algorithms.
 ---
 
 # Caltech-101 Dataset

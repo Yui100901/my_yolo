@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the ImageNette dataset, a subset of 10 easily classified classes from the Imagenet dataset commonly used for training various image processing systems and machine learning models.
+description: Learn about the ImageNette datasets, a subset of 10 easily classified classes from the Imagenet datasets commonly used for training various image processing systems and machine learning models.
 ---
 
 # ImageNette Dataset

@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the Caltech-256 dataset, a broad collection of images used for object classification tasks in machine learning and computer vision algorithms.
+description: Learn about the Caltech-256 datasets, a broad collection of images used for object classification tasks in machine learning and computer vision algorithms.
 ---
 
 # Caltech-256 Dataset

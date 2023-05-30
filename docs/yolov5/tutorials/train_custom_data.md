@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Train your custom dataset with YOLOv5. Learn to collect, label and annotate images, and train and deploy models. Get started now.
+description: Train your custom datasets with YOLOv5. Learn to collect, label and annotate images, and train and deploy models. Get started now.
 ---
 
 📚 This guide explains how to train your own **custom dataset** with [YOLOv5](https://github.com/ultralytics/yolov5) 🚀.  
@@ -88,7 +88,7 @@ Now continue with `2. Select a Model`.
 
 ```yaml
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path: ../datasets/coco128  # dataset root dir
+path: ../datasets/coco128  # datasets root dir
 train: images/train2017  # train images (relative to 'path') 128 images
 val: images/train2017  # val images (relative to 'path') 128 images
 test:  # test images (optional)

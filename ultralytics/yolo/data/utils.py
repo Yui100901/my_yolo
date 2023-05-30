@@ -104,7 +104,7 @@ def verify_image_label(args):
                 # All labels
                 max_cls = int(lb[:, 0].max())  # max label count
                 assert max_cls <= num_cls, \
-                    f'Label class {max_cls} exceeds dataset class count {num_cls}. ' \
+                    f'Label class {max_cls} exceeds datasets class count {num_cls}. ' \
                     f'Possible class labels are 0-{num_cls - 1}'
                 _, i = np.unique(lb, axis=0, return_index=True)
                 if len(i) < nl:  # duplicate row check
@@ -191,7 +191,7 @@ def polygons2masks_overlap(imgsz, segments, downsample_ratio=1):
 
 
 def check_det_dataset(dataset, autodownload=True):
-    """Download, check and/or unzip dataset if not found locally."""
+    """Download, check and/or unzip datasets if not found locally."""
     data = check_file(dataset)
 
     # Download (optional)
@@ -222,7 +222,7 @@ def check_det_dataset(dataset, autodownload=True):
     data['names'] = check_class_names(data['names'])
 
     # Resolve paths
-    path = Path(extract_dir or data.get('path') or Path(data.get('yaml_file', '')).parent)  # dataset root
+    path = Path(extract_dir or data.get('path') or Path(data.get('yaml_file', '')).parent)  # datasets root
 
     if not path.is_absolute():
         path = (DATASETS_DIR / path).resolve()
@@ -242,12 +242,12 @@ def check_det_dataset(dataset, autodownload=True):
     if val:
         val = [Path(x).resolve() for x in (val if isinstance(val, list) else [val])]  # val path
         if not all(x.exists() for x in val):
-            name = clean_url(dataset)  # dataset name with URL auth stripped
+            name = clean_url(dataset)  # datasets name with URL auth stripped
             m = f"\nDataset '{name}' images not found ⚠️, missing paths %s" % [str(x) for x in val if not x.exists()]
             if s and autodownload:
                 LOGGER.warning(m)
             else:
-                m += f"\nNote dataset download directory is '{DATASETS_DIR}'. You can update this in '{SETTINGS_YAML}'"
+                m += f"\nNote datasets download directory is '{DATASETS_DIR}'. You can update this in '{SETTINGS_YAML}'"
                 raise FileNotFoundError(m)
             t = time.time()
             if s.startswith('http') and s.endswith('.zip'):  # URL
@@ -268,22 +268,22 @@ def check_det_dataset(dataset, autodownload=True):
 
 def check_cls_dataset(dataset: str, split=''):
     """
-    Check a classification dataset such as Imagenet.
+    Check a classification datasets such as Imagenet.
 
-    This function takes a `dataset` name as input and returns a dictionary containing information about the dataset.
-    If the dataset is not found, it attempts to download the dataset from the internet and save it locally.
+    This function takes a `datasets` name as input and returns a dictionary containing information about the datasets.
+    If the datasets is not found, it attempts to download the datasets from the internet and save it locally.
 
     Args:
-        dataset (str): Name of the dataset.
+        dataset (str): Name of the datasets.
         split (str, optional): Dataset split, either 'val', 'test', or ''. Defaults to ''.
 
     Returns:
         data (dict): A dictionary containing the following keys and values:
-            'train': Path object for the directory containing the training set of the dataset
-            'val': Path object for the directory containing the validation set of the dataset
-            'test': Path object for the directory containing the test set of the dataset
-            'nc': Number of classes in the dataset
-            'names': List of class names in the dataset
+            'train': Path object for the directory containing the training set of the datasets
+            'val': Path object for the directory containing the validation set of the datasets
+            'test': Path object for the directory containing the test set of the datasets
+            'nc': Number of classes in the datasets
+            'names': List of class names in the datasets
     """
     data_dir = (DATASETS_DIR / dataset).resolve()
     if not data_dir.is_dir():
@@ -312,25 +312,25 @@ def check_cls_dataset(dataset: str, split=''):
 
 class HUBDatasetStats():
     """
-    Class for generating HUB dataset JSON and `-hub` dataset directory
+    Class for generating HUB datasets JSON and `-hub` datasets directory
 
     Arguments
         path:           Path to data.yaml or data.zip (with data.yaml inside data.zip)
         task:           Dataset task. Options are 'detect', 'segment', 'pose', 'classify'.
-        autodownload:   Attempt to download dataset if not found locally
+        autodownload:   Attempt to download datasets if not found locally
 
     Usage
         from ultralytics.yolo.data.utils import HUBDatasetStats
-        stats = HUBDatasetStats('/Users/glennjocher/Downloads/coco8.zip', task='detect')  # detect dataset
-        stats = HUBDatasetStats('/Users/glennjocher/Downloads/coco8-seg.zip', task='segment')  # segment dataset
-        stats = HUBDatasetStats('/Users/glennjocher/Downloads/coco8-pose.zip', task='pose')  # pose dataset
+        stats = HUBDatasetStats('/Users/glennjocher/Downloads/coco8.zip', task='detect')  # detect datasets
+        stats = HUBDatasetStats('/Users/glennjocher/Downloads/coco8-seg.zip', task='segment')  # segment datasets
+        stats = HUBDatasetStats('/Users/glennjocher/Downloads/coco8-pose.zip', task='pose')  # pose datasets
         stats.get_json(save=False)
         stats.process_images()
     """
 
     def __init__(self, path='coco128.yaml', task='detect', autodownload=False):
         """Initialize class."""
-        LOGGER.info(f'Starting HUB dataset checks for {path}....')
+        LOGGER.info(f'Starting HUB datasets checks for {path}....')
         zipped, data_dir, yaml_path = self._unzip(Path(path))
         try:
             # data = yaml_load(check_yaml(yaml_path))  # data dict
@@ -369,10 +369,10 @@ class HUBDatasetStats():
 
     def _hub_ops(self, f):
         """Saves a compressed image for HUB previews."""
-        compress_one_image(f, self.im_dir / Path(f).name)  # save to dataset-hub
+        compress_one_image(f, self.im_dir / Path(f).name)  # save to datasets-hub
 
     def get_json(self, save=False, verbose=False):
-        """Return dataset JSON for Ultralytics HUB."""
+        """Return datasets JSON for Ultralytics HUB."""
         from ultralytics.yolo.data import YOLODataset  # ClassificationDataset
 
         def _round(labels):
@@ -385,7 +385,7 @@ class HUBDatasetStats():
                 n = labels['keypoints'].shape[0]
                 coordinates = np.concatenate((labels['bboxes'], labels['keypoints'].reshape(n, -1)), 1)
             else:
-                raise ValueError('Undefined dataset task.')
+                raise ValueError('Undefined datasets task.')
             zipped = zip(labels['cls'], coordinates)
             return [[int(c), *(round(float(x), 4) for x in points)] for c, points in zipped]
 
@@ -452,7 +452,7 @@ def compress_one_image(f, f_new=None, max_dim=1920, quality=50):
     Usage:
         from pathlib import Path
         from ultralytics.yolo.data.utils import compress_one_image
-        for f in Path('/Users/glennjocher/Downloads/dataset').rglob('*.jpg'):
+        for f in Path('/Users/glennjocher/Downloads/datasets').rglob('*.jpg'):
             compress_one_image(f)
     """
     try:  # use PIL
@@ -480,7 +480,7 @@ def delete_dsstore(path):
 
     Usage:
         from ultralytics.yolo.data.utils import delete_dsstore
-        delete_dsstore('/Users/glennjocher/Downloads/dataset')
+        delete_dsstore('/Users/glennjocher/Downloads/datasets')
 
     Note:
         ".DS_store" files are created by the Apple operating system and contain metadata about folders and files. They

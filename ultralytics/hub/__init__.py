@@ -93,7 +93,7 @@ def get_export(model_id='', format='torchscript'):
 
 def check_dataset(path='', task='detect'):
     """
-    Function for error-checking HUB dataset Zip file before upload
+    Function for error-checking HUB datasets Zip file before upload
 
     Arguments
         path:           Path to data.zip (with data.yaml inside data.zip)
@@ -101,12 +101,12 @@ def check_dataset(path='', task='detect'):
 
     Usage
         from ultralytics.hub import check_dataset
-        check_dataset('path/to/coco8.zip', task='detect')  # detect dataset
-        check_dataset('path/to/coco8-seg.zip', task='segment')  # segment dataset
-        check_dataset('path/to/coco8-pose.zip', task='pose')  # pose dataset
+        check_dataset('path/to/coco8.zip', task='detect')  # detect datasets
+        check_dataset('path/to/coco8-seg.zip', task='segment')  # segment datasets
+        check_dataset('path/to/coco8-pose.zip', task='pose')  # pose datasets
     """
     HUBDatasetStats(path=path, task=task).get_json()
-    LOGGER.info('Checks completed correctly ✅. Upload this dataset to https://hub.ultralytics.com/datasets/.')
+    LOGGER.info('Checks completed correctly ✅. Upload this datasets to https://hub.ultralytics.com/datasets/.')
 
 
 if __name__ == '__main__':

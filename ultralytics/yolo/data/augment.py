@@ -119,17 +119,17 @@ class Mosaic(BaseMixTransform):
     Mosaic augmentation.
 
     This class performs mosaic augmentation by combining multiple (4 or 9) images into a single mosaic image.
-    The augmentation is applied to a dataset with a given probability.
+    The augmentation is applied to a datasets with a given probability.
 
     Attributes:
-        dataset: The dataset on which the mosaic augmentation is applied.
+        dataset: The datasets on which the mosaic augmentation is applied.
         imgsz (int, optional): Image size (height and width) after mosaic pipeline of a single image. Default to 640.
         p (float, optional): Probability of applying the mosaic augmentation. Must be in the range 0-1. Default to 1.0.
         n (int, optional): The grid size, either 4 (for 2x2) or 9 (for 3x3).
     """
 
     def __init__(self, dataset, imgsz=640, p=1.0, n=4):
-        """Initializes the object with a dataset, image size, probability, and border."""
+        """Initializes the object with a datasets, image size, probability, and border."""
         assert 0 <= p <= 1.0, f'The probability should be in range [0, 1], but got {p}.'
         assert n in (4, 9), 'grid must be equal to 4 or 9.'
         super().__init__(dataset=dataset, p=p)
@@ -139,7 +139,7 @@ class Mosaic(BaseMixTransform):
         self.n = n
 
     def get_indexes(self, buffer=True):
-        """Return a list of random indexes from the dataset."""
+        """Return a list of random indexes from the datasets."""
         if buffer:  # select images from buffer
             return random.choices(list(self.dataset.buffer), k=self.n - 1)
         else:  # select any images
@@ -273,7 +273,7 @@ class MixUp(BaseMixTransform):
         super().__init__(dataset=dataset, pre_transform=pre_transform, p=p)
 
     def get_indexes(self):
-        """Get a random index from the dataset."""
+        """Get a random index from the datasets."""
         return random.randint(0, len(self.dataset) - 1)
 
     def _mix_transform(self, labels):

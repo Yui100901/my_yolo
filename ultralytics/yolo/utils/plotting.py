@@ -234,7 +234,7 @@ def plot_labels(boxes, cls, names=(), save_dir=Path(''), on_plot=None):
     import pandas as pd
     import seaborn as sn
 
-    # Plot dataset labels
+    # Plot datasets labels
     LOGGER.info(f"Plotting labels to {save_dir / 'labels.jpg'}... ")
     b = boxes.transpose()  # classes, boxes
     nc = int(cls.max() + 1)  # number of classes

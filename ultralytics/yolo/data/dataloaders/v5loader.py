@@ -1,6 +1,6 @@
 # Ultralytics YOLO 🚀, AGPL-3.0 license
 """
-Dataloaders and dataset utils
+Dataloaders and datasets utils
 """
 
 import contextlib
@@ -121,7 +121,7 @@ def create_dataloader(path,
     if rect and shuffle:
         LOGGER.warning('WARNING ⚠️ --rect is incompatible with DataLoader shuffle, setting shuffle=False')
         shuffle = False
-    with torch_distributed_zero_first(rank):  # init dataset *.cache only once if DDP
+    with torch_distributed_zero_first(rank):  # init datasets *.cache only once if DDP
         dataset = LoadImagesAndLabels(
             path,
             imgsz,
@@ -185,7 +185,7 @@ class _RepeatSampler:
     """
 
     def __init__(self, sampler):
-        """Sampler that repeats dataset samples infinitely."""
+        """Sampler that repeats datasets samples infinitely."""
         self.sampler = sampler
 
     def __iter__(self):
@@ -449,7 +449,7 @@ def img2label_paths(img_paths):
 
 class LoadImagesAndLabels(Dataset):
     """YOLOv5 train_loader/val_loader, loads images and labels for training and validation."""
-    cache_version = 0.6  # dataset labels *.cache version
+    cache_version = 0.6  # datasets labels *.cache version
     rand_interp_methods = [cv2.INTER_NEAREST, cv2.INTER_LINEAR, cv2.INTER_CUBIC, cv2.INTER_AREA, cv2.INTER_LANCZOS4]
 
     def __init__(self,
@@ -530,7 +530,7 @@ class LoadImagesAndLabels(Dataset):
         # Filter images
         if min_items:
             include = np.array([len(x) >= min_items for x in self.labels]).nonzero()[0].astype(int)
-            LOGGER.info(f'{prefix}{n - len(include)}/{n} images filtered from dataset')
+            LOGGER.info(f'{prefix}{n - len(include)}/{n} images filtered from datasets')
             self.im_files = [self.im_files[i] for i in include]
             self.label_files = [self.label_files[i] for i in include]
             self.labels = [self.labels[i] for i in include]
@@ -611,7 +611,7 @@ class LoadImagesAndLabels(Dataset):
             im = cv2.imread(random.choice(self.im_files))  # sample image
             ratio = self.img_size / max(im.shape[0], im.shape[1])  # max(h, w)  # ratio
             b += im.nbytes * ratio ** 2
-        mem_required = b * self.n / n  # GB required to cache dataset into RAM
+        mem_required = b * self.n / n  # GB required to cache datasets into RAM
         mem = psutil.virtual_memory()
         cache = mem_required * (1 + safety_margin) < mem.available  # to cache or not to cache, that is the question
         if not cache:
@@ -622,7 +622,7 @@ class LoadImagesAndLabels(Dataset):
 
     def cache_labels(self, path=Path('./labels.cache'), prefix=''):
         """Cache labels and save as numpy file for next time."""
-        # Cache dataset labels, check images and read shapes
+        # Cache datasets labels, check images and read shapes
         if path.exists():
             path.unlink()  # remove *.cache file if exists
         x = {}  # dict
@@ -665,7 +665,7 @@ class LoadImagesAndLabels(Dataset):
         return len(self.im_files)
 
     def __getitem__(self, index):
-        """Get a sample and its corresponding label, filename and shape from the dataset."""
+        """Get a sample and its corresponding label, filename and shape from the datasets."""
         index = self.indices[index]  # linear, shuffled, or image_weights
 
         hyp = self.hyp
@@ -740,7 +740,7 @@ class LoadImagesAndLabels(Dataset):
         return torch.from_numpy(img), labels_out, self.im_files[index], shapes
 
     def load_image(self, i):
-        """Loads 1 image from dataset index 'i', returns (im, original hw, resized hw)."""
+        """Loads 1 image from datasets index 'i', returns (im, original hw, resized hw)."""
         im, f, fn = self.ims[i], self.im_files[i], self.npy_files[i],
         if im is None:  # not cached in RAM
             if fn.exists():  # load npy
@@ -934,7 +934,7 @@ def flatten_recursive(path=DATASETS_DIR / 'coco128'):
 
 
 def extract_boxes(path=DATASETS_DIR / 'coco128'):  # from utils.dataloaders import *; extract_boxes()
-    # Convert detection dataset into classification dataset, with one directory per class
+    # Convert detection datasets into classification datasets, with one directory per class
     path = Path(path)  # images dir
     shutil.rmtree(path / 'classification') if (path / 'classification').is_dir() else None  # remove existing
     files = list(path.rglob('*.*'))
@@ -968,7 +968,7 @@ def extract_boxes(path=DATASETS_DIR / 'coco128'):  # from utils.dataloaders impo
 
 
 def autosplit(path=DATASETS_DIR / 'coco128/images', weights=(0.9, 0.1, 0.0), annotated_only=False):
-    """Autosplit a dataset into train/val/test splits and save path/autosplit_*.txt files
+    """Autosplit a datasets into train/val/test splits and save path/autosplit_*.txt files
     Usage: from utils.dataloaders import *; autosplit()
     Arguments
         path:            Path to images directory
@@ -1056,7 +1056,7 @@ class ClassificationDataset(torchvision.datasets.ImageFolder):
     """
 
     def __init__(self, root, augment, imgsz, cache=False):
-        """Initialize YOLO dataset with root, augmentation, image size, and cache parameters."""
+        """Initialize YOLO datasets with root, augmentation, image size, and cache parameters."""
         super().__init__(root=root)
         self.torch_transforms = classify_transforms(imgsz)
         self.album_transforms = classify_albumentations(augment, imgsz) if augment else None
@@ -1065,7 +1065,7 @@ class ClassificationDataset(torchvision.datasets.ImageFolder):
         self.samples = [list(x) + [Path(x[0]).with_suffix('.npy'), None] for x in self.samples]  # file, index, npy, im
 
     def __getitem__(self, i):
-        """Retrieves data items of 'dataset' via indices & creates InfiniteDataLoader."""
+        """Retrieves data items of 'datasets' via indices & creates InfiniteDataLoader."""
         f, j, fn, im = self.samples[i]  # filename, index, filename.with_suffix('.npy'), image
         if self.cache_ram and im is None:
             im = self.samples[i][3] = cv2.imread(f)
@@ -1091,7 +1091,7 @@ def create_classification_dataloader(path,
                                      workers=8,
                                      shuffle=True):
     """Returns Dataloader object to be used with YOLOv5 Classifier."""
-    with torch_distributed_zero_first(rank):  # init dataset *.cache only once if DDP
+    with torch_distributed_zero_first(rank):  # init datasets *.cache only once if DDP
         dataset = ClassificationDataset(root=path, imgsz=imgsz, augment=augment, cache=cache)
     batch_size = min(batch_size, len(dataset))
     nd = torch.cuda.device_count()

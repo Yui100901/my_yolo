@@ -194,7 +194,7 @@ class LoadImages:
         return self
 
     def __next__(self):
-        """Return next image, path and metadata from dataset."""
+        """Return next image, path and metadata from datasets."""
         if self.count == self.nf:
             raise StopIteration
         path = self.files[self.count]

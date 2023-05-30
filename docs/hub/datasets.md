@@ -30,7 +30,7 @@ the [YOLOv5 and YOLOv8 Train Custom Data tutorial](https://docs.ultralytics.com/
 
 ```yaml
 # Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
-path:  # dataset root dir (leave empty for HUB)
+path:  # datasets root dir (leave empty for HUB)
 train: images/train  # train images (relative to 'path') 8 images
 val: images/val  # val images (relative to 'path') 8 images
 test:  # test images (optional)

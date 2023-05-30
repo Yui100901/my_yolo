@@ -1,6 +1,6 @@
 # Ultralytics YOLO 🚀, AGPL-3.0 license
 """
-Train a model on a dataset
+Train a model on a datasets
 
 Usage:
     $ yolo mode=train model=yolov8n.pt data=coco128.yaml imgsz=640 epochs=100 batch=16
@@ -58,8 +58,8 @@ class BaseTrainer:
         amp (bool): Flag to enable AMP (Automatic Mixed Precision).
         scaler (amp.GradScaler): Gradient scaler for AMP.
         data (str): Path to data.
-        trainset (torch.utils.data.Dataset): Training dataset.
-        testset (torch.utils.data.Dataset): Testing dataset.
+        trainset (torch.utils.data.Dataset): Training datasets.
+        testset (torch.utils.data.Dataset): Testing datasets.
         ema (nn.Module): EMA (Exponential Moving Average) of the model.
         lf (nn.Module): Loss function.
         scheduler (torch.optim.lr_scheduler._LRScheduler): Learning rate scheduler.
@@ -493,7 +493,7 @@ class BaseTrainer:
         raise NotImplementedError('get_dataloader function not implemented in trainer')
 
     def build_dataset(self, img_path, mode='train', batch=None):
-        """Build dataset"""
+        """Build datasets"""
         raise NotImplementedError('build_dataset function not implemented in trainer')
 
     def criterion(self, preds, batch):
@@ -567,7 +567,7 @@ class BaseTrainer:
                 exists = isinstance(resume, (str, Path)) and Path(resume).exists()
                 last = Path(check_file(resume) if exists else get_latest_run())
 
-                # Check that resume data YAML exists, otherwise strip to force re-download of dataset
+                # Check that resume data YAML exists, otherwise strip to force re-download of datasets
                 ckpt_args = attempt_load_weights(last).args
                 if not Path(ckpt_args['data']).exists():
                     ckpt_args['data'] = self.args.data

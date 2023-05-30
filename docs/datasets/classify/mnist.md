@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about the MNIST dataset, a large database of handwritten digits commonly used for training various image processing systems and machine learning models.
+description: Learn about the MNIST datasets, a large database of handwritten digits commonly used for training various image processing systems and machine learning models.
 ---
 
 # MNIST Dataset

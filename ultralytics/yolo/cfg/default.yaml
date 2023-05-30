@@ -30,7 +30,7 @@ cos_lr: False  # use cosine learning rate scheduler
 close_mosaic: 0  # (int) disable mosaic augmentation for final epochs
 resume: False  # resume training from last checkpoint
 amp: True  # Automatic Mixed Precision (AMP) training, choices=[True, False], True runs AMP check
-fraction: 1.0  # dataset fraction to train on (default is 1.0, all images in train set)
+fraction: 1.0  # datasets fraction to train on (default is 1.0, all images in train set)
 profile: False  # profile ONNX and TensorRT speeds during training for loggers
 # Segmentation
 overlap_mask: True  # masks should overlap during training (segment train only)
@@ -40,7 +40,7 @@ dropout: 0.0  # use dropout regularization (classify train only)
 
 # Val/Test settings ----------------------------------------------------------------------------------------------------
 val: True  # validate/test during training
-split: val  # dataset split to use for validation, i.e. 'val', 'test' or 'train'
+split: val  # datasets split to use for validation, i.e. 'val', 'test' or 'train'
 save_json: False  # save results to JSON file
 save_hybrid: False  # save hybrid version of labels (labels + additional predictions)
 conf:  # object confidence threshold for detection (default 0.25 predict, 0.001 val)
